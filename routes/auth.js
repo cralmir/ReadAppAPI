@@ -22,18 +22,20 @@ router.post("/register", (req, res) => {
   //Lets validate the data
   const { error } = schema.validate(req.body);
 
-  res.send(error.details);
+  if (error) {
+    const { details } = error;
+    return res.status(400).send(details[0].message);
+  }
 
-  // const { name, email, password, date } = req.body;
-  // console.log(name);
-  // User.create({
-  //   name: name,
-  //   email: email,
-  //   password: password,
-  //   date: date
-  // })
-  //   .then(gig => res.redirect("/users"))
-  //   .catch(err => console.log("Error creating: " + err));
+  const { name, email, password, date } = req.body;
+  User.create({
+    name: name,
+    email: email,
+    password: password,
+    date: date
+  })
+    .then(success => res.redirect("/users"))
+    .catch(err => console.log("Error creating: " + err));
 });
 
 // router.post('/login',(req,res)=>{
