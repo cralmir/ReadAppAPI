@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const dbConnection = require("../dbConnection/dbConnection");
+const dbConnection = require("./dbConnection/dbConnection");
 const dotEnv = require("dotenv");
 
 //import routes
-const authRoute = require("../routes/auth");
-const postRoute = require("../routes/post");
+const authRoute = require("./routes/auth");
+const postRoute = require("./routes/post");
 
 dotEnv.config();
 
